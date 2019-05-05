@@ -2,6 +2,7 @@
 %global gh_short    %(c=%{gh_commit}; echo ${c:0:7})
 %global gh_owner    alanxz
 %global gh_project  rabbitmq-c
+%bcond_with docs
 
 Name:      librabbitmq
 Summary:   Client library for AMQP
@@ -16,7 +17,9 @@ Source0:   https://github.com/%{gh_owner}/%{gh_project}/archive/%{gh_commit}/%{g
 BuildRequires: cmake > 2.8
 BuildRequires: pkgconfig(openssl)
 BuildRequires: pkgconfig(popt)
+%if %{with docs}
 BuildRequires: xmlto
+%endif
 
 
 %description
@@ -81,8 +84,10 @@ amqp-publish        Publish a message on an AMQP server
 
 %files tools
 %{_bindir}/amqp-*
+%if %{with docs}
 %doc %{_mandir}/man1/amqp-*.1*
 %doc %{_mandir}/man7/librabbitmq-tools.7*
+%endif
 
 #--------------------------------------------------------------------
 
