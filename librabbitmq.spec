@@ -5,6 +5,8 @@
 %bcond_with docs
 
 %define ldflags %{ldflags} -Wl,--allow-shlib-undefined
+%define _disable_ld_no_undefined 1
+%define _disable_lto 1
 
 Name:		librabbitmq
 Summary:	Client library for AMQP
