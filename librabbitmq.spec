@@ -4,6 +4,8 @@
 %global gh_project  rabbitmq-c
 %bcond_with docs
 
+%define _disable_ld_no_undefined 1
+
 Name:      librabbitmq
 Summary:   Client library for AMQP
 Version:	0.10.0
