@@ -1,26 +1,24 @@
-%global gh_commit   77e3805d1662034339c3c19bcdaaa62a56c1fa7e
-%global gh_short    %(c=%{gh_commit}; echo ${c:0:7})
-%global gh_owner    alanxz
-%global gh_project  rabbitmq-c
+%global gh_commit 77e3805d1662034339c3c19bcdaaa62a56c1fa7e
+%global gh_short %(c=%{gh_commit}; echo ${c:0:7})
+%global gh_owner alanxz
+%global gh_project rabbitmq-c
 %bcond_with docs
 
-%define _disable_ld_no_undefined 1
+%define ldflags %{ldflags} -Wl,--allow-shlib-undefined
 
-Name:      librabbitmq
-Summary:   Client library for AMQP
+Name:		librabbitmq
+Summary:	Client library for AMQP
 Version:	0.10.0
 Release:	2
-License:   MIT
-Group:     System/Libraries
-URL:       https://github.com/alanxz/rabbitmq-c
-
-Source0:   https://github.com/%{gh_owner}/%{gh_project}/archive/%{gh_commit}/%{gh_project}-%{version}-%{gh_short}.tar.gz
-
-BuildRequires: cmake > 2.8
-BuildRequires: pkgconfig(openssl)
-BuildRequires: pkgconfig(popt)
+License:	MIT
+Group:		System/Libraries
+URL:		https://github.com/alanxz/rabbitmq-c
+Source0:	https://github.com/%{gh_owner}/%{gh_project}/archive/%{gh_commit}/%{gh_project}-%{version}-%{gh_short}.tar.gz
+BuildRequires:	cmake > 2.8
+BuildRequires:	pkgconfig(openssl)
+BuildRequires:	pkgconfig(popt)
 %if %{with docs}
-BuildRequires: xmlto
+BuildRequires:	xmlto
 %endif
 
 
@@ -33,15 +31,15 @@ speaking protocol versions 0-9-1.
 %define libname_major 4
 %define libname %mklibname rabbitmq %{libname_major}
 
-%package -n %libname
-Summary:    Header files and development libraries for %{name}
-Group:      System/Libraries
+%package -n %{libname}
+Summary:	Header files and development libraries for %{name}
+Group:		System/Libraries
 
-%description -n %libname
+%description -n %{libname}
 This package contains the header files and development libraries
 for %{name}.
 
-%files -n %libname
+%files -n %{libname}
 %{!?_licensedir:%global license %%doc}
 %license LICENSE-MIT
 %{_libdir}/librabbitmq.so.%{libname_major}{,.*}
@@ -50,16 +48,16 @@ for %{name}.
 
 %define develname %mklibname rabbitmq -d
 
-%package -n %develname
-Summary:    Header files and development libraries for %{name}
-Group:      Development/Other
-Requires:   %libname = %{version}-%{release}
+%package -n %{develname}
+Summary:	Header files and development libraries for %{name}
+Group:		Development/Other
+Requires:	%{libname} = %{version}-%{release}
 
-%description -n %develname
+%description -n %{develname}
 This package contains the header files and development libraries
 for %{name}.
 
-%files -n %develname
+%files -n %{develname}
 %doc AUTHORS THANKS TODO *.md
 %doc Examples
 %{_libdir}/librabbitmq.so
@@ -69,9 +67,9 @@ for %{name}.
 #--------------------------------------------------------------------
 
 %package tools
-Summary:    Example tools built using the librabbitmq package
-Group:      Development/Other
-Requires:   %libname = %{version}
+Summary:	Example tools built using the librabbitmq package
+Group:		Development/Other
+Requires:	%{libname} = %{version}
 
 %description tools
 This package contains example tools built using %{name}.
@@ -94,8 +92,7 @@ amqp-publish        Publish a message on an AMQP server
 #--------------------------------------------------------------------
 
 %prep
-%setup -q -n %{gh_project}-%{gh_commit}
-%autopatch -p1
+%autosetup -n %{gh_project}-%{gh_commit} -p1
 
 # Copy sources to be included in -devel docs.
 cp -pr examples Examples
