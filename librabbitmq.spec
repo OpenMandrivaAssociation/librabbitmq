@@ -4,10 +4,6 @@
 %global gh_project rabbitmq-c
 %bcond_with docs
 
-%define ldflags %{ldflags} -Wl,--allow-shlib-undefined
-%define _disable_ld_no_undefined 1
-%define _disable_lto 1
-
 Name:		librabbitmq
 Summary:	Client library for AMQP
 Version:	0.10.0
@@ -16,6 +12,7 @@ License:	MIT
 Group:		System/Libraries
 URL:		https://github.com/alanxz/rabbitmq-c
 Source0:	https://github.com/%{gh_owner}/%{gh_project}/archive/%{gh_commit}/%{gh_project}-%{version}-%{gh_short}.tar.gz
+Patch0:		librabbitmq-fix-build.patch
 BuildRequires:	cmake > 2.8
 BuildRequires:	pkgconfig(openssl)
 BuildRequires:	pkgconfig(popt)

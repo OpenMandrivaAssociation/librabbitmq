@@ -1,0 +1,12 @@
+diff -Naur a/librabbitmq/amqp_openssl.c b/librabbitmq/amqp_openssl.c
+--- a/librabbitmq/amqp_openssl.c	2018-05-08 07:11:28.000000000 +0000
++++ b/librabbitmq/amqp_openssl.c	2021-02-03 19:52:49.689000000 +0000
+@@ -672,7 +672,7 @@
+   ERR_remove_state(0);
+ #endif
+ 
+-#ifndef LIBRESSL_VERSION_NUMBER
++#ifdef LIBRESSL_VERSION_NUMBER
+   FIPS_mode_set(0);
+ #endif
+ 
