@@ -7,7 +7,7 @@
 Name:		librabbitmq
 Summary:	Client library for AMQP
 Version:	0.11.0
-Release:	2
+Release:	3
 License:	MIT
 Group:		System/Libraries
 URL:		https://github.com/alanxz/rabbitmq-c
