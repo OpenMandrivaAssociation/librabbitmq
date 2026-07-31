@@ -6,8 +6,8 @@
 
 Name:		librabbitmq
 Summary:	Client library for AMQP
-Version:	0.11.0
-Release:	3
+Version:	0.17.0
+Release:	1
 License:	MIT
 Group:		System/Libraries
 URL:		https://github.com/alanxz/rabbitmq-c
@@ -91,7 +91,7 @@ amqp-publish        Publish a message on an AMQP server
 #--------------------------------------------------------------------
 
 %prep
-%autosetup -n %{gh_project}-%{gh_commit} -p1
+%autosetup -n rabbitmq-c-77e3805d1662034339c3c19bcdaaa62a56c1fa7e -p1
 
 # Copy sources to be included in -devel docs.
 cp -pr examples Examples
